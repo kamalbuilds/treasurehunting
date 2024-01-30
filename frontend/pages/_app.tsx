@@ -1,6 +1,16 @@
-import "@/styles/globals.css";
+import { ThirdwebProvider } from "@thirdweb-dev/react";
 import type { AppProps } from "next/app";
+import "../styles/globals.css";
+import { LightlinkPegasusTestnet } from "@thirdweb-dev/chains";
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+function MyApp({ Component, pageProps }: AppProps) {
+  const activeChain = LightlinkPegasusTestnet;
+
+  return (
+    <ThirdwebProvider activeChain={activeChain} clientId={process.env.NEXT_PUBLIC_APP_THIRDWEBCLIENT}>
+      <Component {...pageProps} />
+    </ThirdwebProvider>
+  );
 }
+
+export default MyApp;
